@@ -2,6 +2,7 @@
 
 !.gitignore
 !README.md
+!start.sh
 
 !src
 !src/*.py
