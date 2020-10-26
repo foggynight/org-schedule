@@ -2,22 +2,25 @@ class Schedule:
     """
     Schedule entry generator for emacs org-mode.
     """
-    def __init__(self, schedule_path):
-        """ @params
-        - schedule_path {string}: Path to the schedule file
+    def __init__(self, path):
         """
-        self.data = self.parse_schedule(schedule_path)
+        @params
+        - path {str}: Path to the schedule file
+        """
+        self.data = self.parse_schedule(path)
 
-    def parse_schedule(self, schedule_path):
+    def parse_schedule(self, path):
         """
-        Parse the schedule file.
+        Parse a schedule file for weekly events.
 
         - Days are separated by lines containing only '---'
 
         @params
-        - schedule_path {string}: Path to the schedule file
+        - path {str}: Path to the schedule file
+
+        @return {[[str]]}: List of lists containing schedule events
         """
-        file = open(schedule_path)
+        file = open(path)
         lines = file.readlines()
 
         data = [[]]
@@ -32,3 +35,17 @@ class Schedule:
 
         file.close()
         return data
+
+    def parse_event(self, event):
+        """
+        Get the time and title of a schedule event.
+
+        @params
+        - event {str}: Schedule event
+
+        @returns
+        - {str}: Time of the schedule event
+        - {str}: Title of the schedule event
+        """
+        event = event.split(' | ')
+        return (event[0], event[1])
