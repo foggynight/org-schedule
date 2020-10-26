@@ -2,12 +2,12 @@ class Schedule:
     """
     Schedule entry generator for emacs org-mode.
     """
-    def __init__(self, path):
+    def __init__(self, config):
         """
         @params
-        - path {str}: Path to the schedule file
+        - config {{str:str}}: Program configuration
         """
-        self.data = self.parse_schedule(path)
+        self.data = self.parse_schedule(config['file'])
 
     def parse_schedule(self, path):
         """
