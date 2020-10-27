@@ -2,7 +2,7 @@ import datetime
 
 class Schedule:
     """
-    Schedule entry generator for emacs org-mode.
+    Schedule entry generator.
     """
     def __init__(self, config):
         """

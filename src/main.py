@@ -7,6 +7,9 @@ def process_args():
     """
     Process command line arguments.
 
+    By default, the schedule file is schedule.txt and the date is the current
+    date.
+
     @return {{str:str}}: Program configuration
     """
     config = {
@@ -28,9 +31,7 @@ def process_args():
 
 def main():
     """
-    Generate schedule entries for emacs org-mode.
-
-    By default, the schedule file is schedule.txt.
+    Generate weekly schedule.
     """
     config = process_args()
     sched = Schedule(config)
