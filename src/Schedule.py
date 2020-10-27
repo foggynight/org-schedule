@@ -1,3 +1,5 @@
+import datetime
+
 class Schedule:
     """
     Schedule entry generator for emacs org-mode.
@@ -7,7 +9,12 @@ class Schedule:
         @params
         - config {{str:str}}: Program configuration
         """
-        self.data = self.parse_schedule(config['file'])
+        today = datetime.date.today()
+        monday = today - datetime.timedelta(today.weekday())
+
+        self.config = config
+        self.day = monday
+        self.week = self.parse_schedule(config['file'])
 
     def parse_schedule(self, path):
         """
@@ -23,18 +30,18 @@ class Schedule:
         file = open(path)
         lines = file.readlines()
 
-        data = [[]]
+        week = [[]]
         index = 0
 
         for line in [l.rstrip('\n') for l in lines]:
             if line == '---':
-                data.append([])
+                week.append([])
                 index += 1
             else:
-                data[index].append(line)
+                week[index].append(line)
 
         file.close()
-        return data
+        return week
 
     def parse_event(self, event):
         """
@@ -44,8 +51,10 @@ class Schedule:
         - event {str}: Schedule event
 
         @returns
-        - {str}: Time of the schedule event
-        - {str}: Title of the schedule event
+        - {str}: Schedule event string
         """
         event = event.split(' | ')
-        return (event[0], event[1])
+
+        return '** TODO {}\n   SCHEDULED: <{} {} {}>\n'.format(
+            event[1], self.day, self.day.strftime("%A")[:3], event[0]
+        )
