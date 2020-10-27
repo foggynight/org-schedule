@@ -19,9 +19,7 @@ def process_args():
         if file_arg:
             config['file'] = arg
             file_arg = False
-            continue
-
-        if arg in ['-f', '--file']:
+        elif arg in ['-f', '--file']:
             file_arg = True
         elif arg != argv[0]:
             config['date'] = arg
