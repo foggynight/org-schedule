@@ -59,7 +59,7 @@ class Schedule:
         f'** TODO {event[1]}\n' + \
         f'   SCHEDULED: <{date} {date.strftime("%A")[:3]} {event[0]}>\n'
 
-    def get_schedule(self):
+    def get_week_schedule(self):
         """
         Print weekly event schedule.
         """
@@ -73,3 +73,13 @@ class Schedule:
                 print(self.parse_event(event, date))
             print('---\n')
             date -= datetime.timedelta(1)
+
+    def get_day_schedule(self, date):
+        if date.weekday() > 4:
+            print('Error: Weekdays monday through friday only.')
+
+        day = self.week[date.weekday()]
+        print(f'* {date}\n')
+        for event in day:
+            print(self.parse_event(event, date))
+        print('---\n')

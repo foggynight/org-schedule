@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from sys import argv
 
 from Schedule import Schedule
@@ -14,7 +14,8 @@ def process_args():
     """
     config = {
         'file': 'schedule.txt',
-        'date': date.today()
+        'date': date.today(),
+        'date_set': False
     }
 
     file_arg = False
@@ -25,7 +26,8 @@ def process_args():
         elif arg in ['-f', '--file']:
             file_arg = True
         elif arg != argv[0]:
-            config['date'] = arg
+            config['date'] = datetime.strptime(arg, '%Y-%m-%d').date()
+            config['date_set'] = True
 
     return config
 
@@ -36,7 +38,10 @@ def main():
     config = process_args()
     sched = Schedule(config)
 
-    sched.get_schedule()
+    if config['date_set']:
+        sched.get_day_schedule(config['date'])
+    else:
+        sched.get_week_schedule()
 
 if __name__ == '__main__':
     main()
