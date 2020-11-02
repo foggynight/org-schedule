@@ -68,6 +68,7 @@ class Schedule:
         week.reverse()
 
         for day in week:
+            print(f'* {date}\n')
             for event in day:
                 print(self.parse_event(event, date))
             print('---\n')
