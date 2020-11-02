@@ -11,7 +11,6 @@ class Schedule:
         """
         today = config['date']
         last_monday = today - datetime.timedelta(today.weekday())
-        print(last_monday)
 
         self.config = config
         self.start_date = last_monday
@@ -44,7 +43,7 @@ class Schedule:
         file.close()
         return week
 
-    def parse_event(self, event):
+    def parse_event(self, event, date):
         """
         Get the time and title of a schedule event.
 
@@ -57,5 +56,19 @@ class Schedule:
         event = event.split(' | ')
 
         return '** TODO {}\n   SCHEDULED: <{} {} {}>\n'.format(
-            event[1], self.day, self.day.strftime("%A")[:3], event[0]
+            event[1], date, date.strftime("%A")[:3], event[0]
         )
+
+    def get_schedule(self):
+        """
+        Print weekly event schedule.
+        """
+        date = self.start_date + datetime.timedelta(4)
+        week = self.week.copy()
+        week.reverse()
+
+        for day in week:
+            for event in day:
+                print(self.parse_event(event, date))
+            print('---\n')
+            date -= datetime.timedelta(1)

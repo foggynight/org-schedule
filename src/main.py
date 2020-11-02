@@ -36,5 +36,7 @@ def main():
     config = process_args()
     sched = Schedule(config)
 
+    sched.get_schedule()
+
 if __name__ == '__main__':
     main()
