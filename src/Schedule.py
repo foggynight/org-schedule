@@ -55,9 +55,9 @@ class Schedule:
         """
         event = event.split(' | ')
 
-        return '** TODO {}\n   SCHEDULED: <{} {} {}>\n'.format(
-            event[1], date, date.strftime("%A")[:3], event[0]
-        )
+        return \
+        f'** TODO {event[1]}\n' + \
+        f'   SCHEDULED: <{date} {date.strftime("%A")[:3]} {event[0]}>\n'
 
     def get_schedule(self):
         """
