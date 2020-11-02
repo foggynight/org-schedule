@@ -9,11 +9,12 @@ class Schedule:
         @params
         - config {{str:str}}: Program configuration
         """
-        today = datetime.date.today()
-        monday = today - datetime.timedelta(today.weekday())
+        today = config['date']
+        last_monday = today - datetime.timedelta(today.weekday())
+        print(last_monday)
 
         self.config = config
-        self.day = monday
+        self.start_date = last_monday
         self.week = self.parse_schedule(config['file'])
 
     def parse_schedule(self, path):

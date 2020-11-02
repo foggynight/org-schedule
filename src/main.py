@@ -7,14 +7,14 @@ def process_args():
     """
     Process command line arguments.
 
-    By default, the schedule file is schedule.txt and the date is the current
-    date.
+    By default, the schedule file is schedule.txt and the date is the
+    current date.
 
     @return {{str:str}}: Program configuration
     """
     config = {
         'file': 'schedule.txt',
-        'date': str(date.today())
+        'date': date.today()
     }
 
     file_arg = False
