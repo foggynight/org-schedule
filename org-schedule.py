@@ -89,21 +89,16 @@ class Schedule:
             print(self.parse_event(event, date))
         print('---\n')
 
-def process_args():
+def process_args(config):
     """
     Process command line arguments.
 
     By default, the schedule file is schedule.txt and the date is the
     current date.
 
-    @return {{str:str}}: Program configuration
+    @params:
+    - config {{str:str}}: Program configuration
     """
-    config = {
-        'file': 'schedule.txt',
-        'date': date.today(),
-        'date_set': False
-    }
-
     file_arg = False
     for arg in argv:
         if file_arg:
@@ -115,10 +110,14 @@ def process_args():
             config['date'] = strptime(arg, '%Y-%m-%d').date()
             config['date_set'] = True
 
-    return config
-
 if __name__ == '__main__':
-    config = process_args()
+    config = {
+        'file': 'schedule.txt',
+        'date': date.today(),
+        'date_set': False
+    }
+
+    process_args(config)
     sched = Schedule(config)
 
     if config['date_set']:
