@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2020 Robert Coffey
 
-import datetime
+from datetime import date, datetime, timedelta
+from sys import argv
 
 class Schedule:
     """
@@ -13,7 +15,7 @@ class Schedule:
         - config {{str:str}}: Program configuration
         """
         today = config['date']
-        last_monday = today - datetime.timedelta(today.weekday())
+        last_monday = today - timedelta(today.weekday())
 
         self.config = config
         self.start_date = last_monday
@@ -66,7 +68,7 @@ class Schedule:
         """
         Print weekly event schedule.
         """
-        date = self.start_date + datetime.timedelta(4)
+        date = self.start_date + timedelta(4)
         week = self.week.copy()
         week.reverse()
 
@@ -75,7 +77,7 @@ class Schedule:
             for event in day:
                 print(self.parse_event(event, date))
             print('---\n')
-            date -= datetime.timedelta(1)
+            date -= timedelta(1)
 
     def get_day_schedule(self, date):
         if date.weekday() > 4:
@@ -86,3 +88,40 @@ class Schedule:
         for event in day:
             print(self.parse_event(event, date))
         print('---\n')
+
+def process_args():
+    """
+    Process command line arguments.
+
+    By default, the schedule file is schedule.txt and the date is the
+    current date.
+
+    @return {{str:str}}: Program configuration
+    """
+    config = {
+        'file': 'schedule.txt',
+        'date': date.today(),
+        'date_set': False
+    }
+
+    file_arg = False
+    for arg in argv:
+        if file_arg:
+            config['file'] = arg
+            file_arg = False
+        elif arg in ['-f', '--file']:
+            file_arg = True
+        elif arg != argv[0]:
+            config['date'] = strptime(arg, '%Y-%m-%d').date()
+            config['date_set'] = True
+
+    return config
+
+if __name__ == '__main__':
+    config = process_args()
+    sched = Schedule(config)
+
+    if config['date_set']:
+        sched.get_day_schedule(config['date'])
+    else:
+        sched.get_week_schedule()
