@@ -34,10 +34,7 @@ def process_args():
 
     return config
 
-def main():
-    """
-    Generate weekly schedule.
-    """
+if __name__ == '__main__':
     config = process_args()
     sched = Schedule(config)
 
@@ -45,6 +42,3 @@ def main():
         sched.get_day_schedule(config['date'])
     else:
         sched.get_week_schedule()
-
-if __name__ == '__main__':
-    main()
