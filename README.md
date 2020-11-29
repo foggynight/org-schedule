@@ -2,6 +2,13 @@
 
 Daily schedule generator for Emacs Org-Mode.
 
+## Installation
+
+```
+git clone https://github.com/foggynight/org-schedule.git
+cd org-schedule
+```
+
 ## License
 
 Copyright (C) 2020 Robert Coffey
