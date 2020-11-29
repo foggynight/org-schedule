@@ -1,6 +1,6 @@
 # org-schedule
 
-Daily schedule generator for Emacs Org-Mode.
+Daily schedule generator, formatted for Emacs Org-Mode.
 
 ## Installation
 
