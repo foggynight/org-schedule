@@ -25,7 +25,7 @@ class Schedule:
         """
         Parse a schedule file for weekly events.
 
-        - Days are separated by lines containing only '---'
+        Days are separated by lines containing only '---'.
 
         @params
         - path {str}: Path to the schedule file
