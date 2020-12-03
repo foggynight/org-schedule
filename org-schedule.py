@@ -111,7 +111,7 @@ def process_args(config):
         elif arg in ['-f', '--file']:
             file_arg = True
         elif arg != argv[0]:
-            config['date'] = strptime(arg, '%Y-%m-%d').date()
+            config['date'] = datetime.strptime(arg, '%Y-%m-%d').date()
             config['date_set'] = True
 
 if __name__ == '__main__':
