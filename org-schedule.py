@@ -5,7 +5,7 @@
 # Daily schedule generator, formatted for Emacs Org-Mode.
 #
 # Copyright (C) 2020 Robert Coffey
-# Licensed under the GNU GPLv2
+# Released under the GPLv2 license
 
 from datetime import date, datetime, timedelta
 from sys import argv
