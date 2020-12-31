@@ -9,6 +9,10 @@ git clone https://github.com/foggynight/org-schedule.git
 cd org-schedule
 ```
 
+## Dependencies
+
+- Python3
+
 ## License
 
 Copyright (C) 2020 Robert Coffey
